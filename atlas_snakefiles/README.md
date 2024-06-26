@@ -6,6 +6,5 @@ Dump of all snakefiles to run cellranger from fastq_dump using SRA_toolit
    link to reference genome: https://www.10xgenomics.com/support/software/cell-ranger-arc/downloads 
 
 --Things to do --
-1) Make configfile.yaml for atac_accessions, rna_accessions, and absolute path to folders to make pipeline cleaner and more modular
-2) Somehow incorporate get_atac and get_rna into run_cr
-3) Add code to remove temporary files to make it cleaner
+1) Add code to remove temporary files to make it cleaner
+2) Can possibly use fasterq-dump; but fasterq-dump gives fastq and not fastq.gz which is what cellranger wants.
