@@ -42,7 +42,7 @@ rule create_libraries_csv:
     "atac_seq/",
     "rna_seq/"
   output:
-      "{atac_srr}_{rna_srr}_libraries.csv"
+    "libraries/{atac_srr}_{rna_srr}_libraries.csv"
   run:
     atac_srr = wildcards.atac_srr
     rna_srr = wildcards.rna_srr
