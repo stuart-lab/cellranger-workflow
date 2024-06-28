@@ -6,8 +6,8 @@ All files stored in "atlas_snakefiles" directory
 snakemake --cores all -s run_cr.snakefile
 ```
 **Dependencies**
-|No.| Dependencies |
-|--:|--------------|
-|  1| CellRangerARC|
-|  2| SRA Toolkit  |
-|  3| Snakemake    |
+| Dependencies  |Link                                                                |
+|--------------:|--------------------------------------------------------------------|
+| CellRangerARC |https://www.10xgenomics.com/support/software/cell-ranger-arc/latest |
+| SRA_Toolkit   |https://github.com/ncbi/sra-tools/wiki/01.-Downloading-SRA-Toolkit  |
+| Snakemake     |https://snakemake.readthedocs.io/en/stable/                         |
