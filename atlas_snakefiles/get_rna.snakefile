@@ -20,7 +20,7 @@ rule prefetch_rna:
       "rna_seq/{srr}/{srr}.sra"
     shell:
       """
-      prefetch {wildcards.srr} --max-size 50G -O rna_seq/{wildcards.srr}
+      prefetch {wildcards.srr} --max-size 50G -O rna_seq
       """
       
 rule fastq_dump_rna:
@@ -55,5 +55,4 @@ rule rename_fastq_files:
       mv rna_seq/{wildcards.srr}/{wildcards.srr}_4.fastq.gz rna_seq/{wildcards.srr}/{wildcards.srr}_S1_L001_R2_001.fastq.gz
       """
     
-
 

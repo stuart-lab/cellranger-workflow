@@ -1,5 +1,4 @@
 configfile:'config.yaml'
-print (config['path']['wd'])
 
 def read_rna_accession():
     with open('rna_accessions.txt') as f:
@@ -22,7 +21,7 @@ rule all:
 
 rule get_files_atac:
   output:
-    "atac_seq/"
+    directory("atac_seq/")
   shell:
     """
     snakemake --cores all -s get_atac.snakefile
@@ -30,7 +29,7 @@ rule get_files_atac:
 
 rule get_files_rna:
   output:
-    "rna_seq/"
+    directory("rna_seq/")
   shell:
     """
     snakemake --cores all -s get_rna.snakefile
@@ -56,7 +55,7 @@ rule run_cr:
   input:
     expand("libraries/{atac_srr}_{rna_srr}_libraries.csv", zip, atac_srr=atac_SRRs, rna_srr=rna_SRRs)
   output:
-    "{atac_srr}_{rna_srr}"
+    directory("{atac_srr}_{rna_srr}")
   shell:
     """
     cellranger-arc count --id={wildcards.atac_srr}_{wildcards.rna_srr} \
