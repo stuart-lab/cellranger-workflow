@@ -13,4 +13,5 @@ snakemake --cores all -s run_cr.snakefile
 | Snakemake     |https://snakemake.readthedocs.io/en/stable/                         |
 
 **Workflow**
+
 ![plot](./run_cr.PNG)
