@@ -1,5 +1,5 @@
 # retina-atlas
-All files stored in "atlas_snakefiles" directory
+All files stored in "atlas_snakefiles_faster" directory
 
 **To run**
 ```

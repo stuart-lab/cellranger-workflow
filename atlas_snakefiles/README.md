@@ -1,3 +1,6 @@
+##This pipeline is outdated; use atlas_snakefiles_faster##
+
+
 Dependencies: 1)CellRangerARC 2)SRA tookit 3)Snakemake
 
 fastq-dump -> clean&rename files -> run cellranger -> {atac_sec_accession}_{rna_seq_accession} file w/ outputs
