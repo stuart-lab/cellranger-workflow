@@ -1,0 +1,4 @@
+path:
+  wd: "/home/users/astar/gis/stufrancis/scratch/atlas_snakefiles_faster"
+  ref_genome: "../../CellRangerFiles/refdata-cellranger-arc-GRCh38-2020-A-2.0.0"
+
