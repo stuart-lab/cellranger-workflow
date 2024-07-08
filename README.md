@@ -16,7 +16,7 @@ snakemake --cores all --keep-incomplete --resources load=100 -s run_cr_atac.snak
 
 **Setup**
 
-In the config.yaml file ,with reference to location of scripts, change cd to absolute path, and ref_genome to relative path.
+In the config.yaml file, with reference to location of scripts, change cd to absolute path, and ref_genome to relative path.
 
 **Instructions**
 
