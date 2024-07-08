@@ -3,7 +3,8 @@ All files stored in "atlas_snakefiles_faster" directory
 
 **To run**
 ```
-snakemake --cores all -s run_cr.snakefile
+##change "run_cr_atac.snakefile" accordingly, if running multiome pipeline##
+snakemake --cores all --keep-incomplete --resources load=100 -s run_cr_atac.snakefile
 ```
 **Dependencies**
 | Dependencies  |Link                                                                |
@@ -11,6 +12,16 @@ snakemake --cores all -s run_cr.snakefile
 | CellRangerARC |https://www.10xgenomics.com/support/software/cell-ranger-arc/latest |
 | SRA_Toolkit   |https://github.com/ncbi/sra-tools/wiki/01.-Downloading-SRA-Toolkit  |
 | Snakemake     |https://snakemake.readthedocs.io/en/stable/                         |
+| PigZ          |https://zlib.net/pigz/                                              |
+
+**Setup**
+In the config.yaml file ,with reference to location of scripts, change cd to absolute path, and ref_genome to relative path.
+
+**Instructions**
+How to use:
+1)Depending on if it is multiome or ATAC-seq, download respective folder.
+2)Paste "SRR" accession numbers in "atac_accessions.txt" (and "rna_accessions.txt")
+2)For multiome run, ensure accession numbers of scRNA and scATAC are in sequence.
 
 **Workflow**
 
