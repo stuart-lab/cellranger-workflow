@@ -15,9 +15,11 @@ snakemake --cores all --keep-incomplete --resources load=100 -s run_cr_atac.snak
 | PigZ          |https://zlib.net/pigz/                                              |
 
 **Setup**
+
 In the config.yaml file ,with reference to location of scripts, change cd to absolute path, and ref_genome to relative path.
 
 **Instructions**
+
 How to use:
 1)Depending on if it is multiome or ATAC-seq, download respective folder.
 2)Paste "SRR" accession numbers in "atac_accessions.txt" (and "rna_accessions.txt")
