@@ -28,9 +28,11 @@ rule run_cr_atac:
   params:
     ref=config['path']['ref_genome'],
     fastqs=lambda wildcards, output: config['path']['wd'] + f"/atac_seq/{output}"
+  resources:
+    load=50
   shell:
     """
-    cellranger-atac count --id=sample345 \
+    cellranger-atac count --id={wildcards.atac_srr} \
                           --reference={params.ref} \
                           --fastqs={params.fastqs} \
                           --localcores=48 \

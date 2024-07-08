@@ -19,7 +19,7 @@ rule prefetch_atac:
       "atac_seq/{srr}/{srr}.sra"
     shell:
       """
-      prefetch {wildcards.srr} --max-size 50G -O atac_seq
+      prefetch {wildcards.srr} --max-size 500G -O atac_seq
       """
 
 rule fastq_dump_atac:
