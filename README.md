@@ -23,7 +23,8 @@ In the config.yaml file, with reference to location of scripts, change cd to abs
 How to use:
 1)Depending on if it is multiome or ATAC-seq, download respective folder.
 2)Paste "SRR" accession numbers in "atac_accessions.txt" (and "rna_accessions.txt")
-2)For multiome run, ensure accession numbers of scRNA and scATAC are in sequence.
+3)For multiome run, ensure accession numbers of scRNA and scATAC are in sequence.
+**Note: rename_fastq_files needs to be modified according to the reads given in SRA tookit (e.g. some datasets don't have index files,etc)
 
 **Workflow**
 
