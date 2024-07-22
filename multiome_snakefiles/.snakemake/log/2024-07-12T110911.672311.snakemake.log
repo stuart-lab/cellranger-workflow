@@ -1,0 +1,175 @@
+Building DAG of jobs...
+Using shell: /usr/bin/bash
+Provided cores: 1 (use --cores to define parallelism)
+Rules claiming more threads will be scaled down.
+Job stats:
+job                     count
+--------------------  -------
+all                         1
+create_libraries_csv       10
+total                      11
+
+Select jobs to execute...
+Execute 1 jobs...
+
+[Fri Jul 12 11:09:11 2024]
+localrule create_libraries_csv:
+    input: tissues
+    output: libraries/melas_1_purified_rpe_libraries.csv
+    jobid: 3
+    reason: Missing output files: libraries/melas_1_purified_rpe_libraries.csv
+    wildcards: id=melas_1_purified_rpe
+    resources: tmpdir=/tmp
+
+[Fri Jul 12 11:09:12 2024]
+Finished job 3.
+1 of 11 steps (9%) done
+Select jobs to execute...
+Execute 1 jobs...
+
+[Fri Jul 12 11:09:12 2024]
+localrule create_libraries_csv:
+    input: tissues
+    output: libraries/control_9_retina_libraries.csv
+    jobid: 7
+    reason: Missing output files: libraries/control_9_retina_libraries.csv
+    wildcards: id=control_9_retina
+    resources: tmpdir=/tmp
+
+[Fri Jul 12 11:09:12 2024]
+Finished job 7.
+2 of 11 steps (18%) done
+Select jobs to execute...
+Execute 1 jobs...
+
+[Fri Jul 12 11:09:13 2024]
+localrule create_libraries_csv:
+    input: tissues
+    output: libraries/melas_1_retina_libraries.csv
+    jobid: 8
+    reason: Missing output files: libraries/melas_1_retina_libraries.csv
+    wildcards: id=melas_1_retina
+    resources: tmpdir=/tmp
+
+[Fri Jul 12 11:09:13 2024]
+Finished job 8.
+3 of 11 steps (27%) done
+Select jobs to execute...
+Execute 1 jobs...
+
+[Fri Jul 12 11:09:13 2024]
+localrule create_libraries_csv:
+    input: tissues
+    output: libraries/control_2_rpe_choroid_libraries.csv
+    jobid: 4
+    reason: Missing output files: libraries/control_2_rpe_choroid_libraries.csv
+    wildcards: id=control_2_rpe_choroid
+    resources: tmpdir=/tmp
+
+[Fri Jul 12 11:09:14 2024]
+Finished job 4.
+4 of 11 steps (36%) done
+Select jobs to execute...
+Execute 1 jobs...
+
+[Fri Jul 12 11:09:14 2024]
+localrule create_libraries_csv:
+    input: tissues
+    output: libraries/melas_1_rpe_choroid_rep1_libraries.csv
+    jobid: 1
+    reason: Missing output files: libraries/melas_1_rpe_choroid_rep1_libraries.csv
+    wildcards: id=melas_1_rpe_choroid_rep1
+    resources: tmpdir=/tmp
+
+[Fri Jul 12 11:09:14 2024]
+Finished job 1.
+5 of 11 steps (45%) done
+Select jobs to execute...
+Execute 1 jobs...
+
+[Fri Jul 12 11:09:14 2024]
+localrule create_libraries_csv:
+    input: tissues
+    output: libraries/melas_1_rpe_choroid_rep2_libraries.csv
+    jobid: 5
+    reason: Missing output files: libraries/melas_1_rpe_choroid_rep2_libraries.csv
+    wildcards: id=melas_1_rpe_choroid_rep2
+    resources: tmpdir=/tmp
+
+[Fri Jul 12 11:09:15 2024]
+Finished job 5.
+6 of 11 steps (55%) done
+Select jobs to execute...
+Execute 1 jobs...
+
+[Fri Jul 12 11:09:15 2024]
+localrule create_libraries_csv:
+    input: tissues
+    output: libraries/control_9_rpe_choroid_libraries.csv
+    jobid: 9
+    reason: Missing output files: libraries/control_9_rpe_choroid_libraries.csv
+    wildcards: id=control_9_rpe_choroid
+    resources: tmpdir=/tmp
+
+[Fri Jul 12 11:09:16 2024]
+Finished job 9.
+7 of 11 steps (64%) done
+Select jobs to execute...
+Execute 1 jobs...
+
+[Fri Jul 12 11:09:16 2024]
+localrule create_libraries_csv:
+    input: tissues
+    output: libraries/control_10_rpe_choroid_libraries.csv
+    jobid: 10
+    reason: Missing output files: libraries/control_10_rpe_choroid_libraries.csv
+    wildcards: id=control_10_rpe_choroid
+    resources: tmpdir=/tmp
+
+[Fri Jul 12 11:09:16 2024]
+Finished job 10.
+8 of 11 steps (73%) done
+Select jobs to execute...
+Execute 1 jobs...
+
+[Fri Jul 12 11:09:16 2024]
+localrule create_libraries_csv:
+    input: tissues
+    output: libraries/control_10_retina_libraries.csv
+    jobid: 2
+    reason: Missing output files: libraries/control_10_retina_libraries.csv
+    wildcards: id=control_10_retina
+    resources: tmpdir=/tmp
+
+[Fri Jul 12 11:09:17 2024]
+Finished job 2.
+9 of 11 steps (82%) done
+Select jobs to execute...
+Execute 1 jobs...
+
+[Fri Jul 12 11:09:17 2024]
+localrule create_libraries_csv:
+    input: tissues
+    output: libraries/control_3_purified_rpe_libraries.csv
+    jobid: 6
+    reason: Missing output files: libraries/control_3_purified_rpe_libraries.csv
+    wildcards: id=control_3_purified_rpe
+    resources: tmpdir=/tmp
+
+[Fri Jul 12 11:09:18 2024]
+Finished job 6.
+10 of 11 steps (91%) done
+Select jobs to execute...
+Execute 1 jobs...
+
+[Fri Jul 12 11:09:18 2024]
+localrule all:
+    input: libraries/melas_1_rpe_choroid_rep1_libraries.csv, libraries/control_10_retina_libraries.csv, libraries/melas_1_purified_rpe_libraries.csv, libraries/control_2_rpe_choroid_libraries.csv, libraries/melas_1_rpe_choroid_rep2_libraries.csv, libraries/control_3_purified_rpe_libraries.csv, libraries/control_9_retina_libraries.csv, libraries/melas_1_retina_libraries.csv, libraries/control_9_rpe_choroid_libraries.csv, libraries/control_10_rpe_choroid_libraries.csv
+    jobid: 0
+    reason: Input files updated by another job: libraries/control_9_retina_libraries.csv, libraries/melas_1_rpe_choroid_rep2_libraries.csv, libraries/control_3_purified_rpe_libraries.csv, libraries/control_10_retina_libraries.csv, libraries/control_2_rpe_choroid_libraries.csv, libraries/melas_1_retina_libraries.csv, libraries/control_10_rpe_choroid_libraries.csv, libraries/melas_1_rpe_choroid_rep1_libraries.csv, libraries/melas_1_purified_rpe_libraries.csv, libraries/control_9_rpe_choroid_libraries.csv
+    resources: tmpdir=/tmp
+
+[Fri Jul 12 11:09:18 2024]
+Finished job 0.
+11 of 11 steps (100%) done
+Complete log: .snakemake/log/2024-07-12T110911.672311.snakemake.log

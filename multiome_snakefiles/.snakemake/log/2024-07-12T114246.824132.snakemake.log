@@ -1,0 +1,7 @@
+Building DAG of jobs...
+MissingInputException in rule prefetch_atac in file /charonfs/scratch/users/astar/gis/stufrancis/adai_snakemake/libraries.snakefile, line 47:
+Missing input files for rule prefetch_atac:
+    output: tissues/control_9_retina/atac_seq, tissues/control_9_retina/rna_seq
+    wildcards: id=control_9_retina
+    affected files:
+        tissues

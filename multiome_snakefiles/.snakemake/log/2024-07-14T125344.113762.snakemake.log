@@ -1,0 +1,56 @@
+Building DAG of jobs...
+Using shell: /usr/bin/bash
+Provided cores: 48
+Rules claiming more threads will be scaled down.
+Job stats:
+job       count
+------  -------
+all           1
+run_cr        2
+total         3
+
+Select jobs to execute...
+Execute 2 jobs...
+
+[Sun Jul 14 12:53:44 2024]
+localrule run_cr:
+    output: control_9_retina
+    jobid: 1
+    reason: Missing output files: control_9_retina
+    wildcards: id=control_9_retina
+    resources: tmpdir=/tmp, load=50
+
+
+[Sun Jul 14 12:53:44 2024]
+localrule run_cr:
+    output: melas_1_retina
+    jobid: 2
+    reason: Missing output files: melas_1_retina
+    wildcards: id=melas_1_retina
+    resources: tmpdir=/tmp, load=50
+
+[Sun Jul 14 12:53:47 2024]
+[Sun Jul 14 12:53:47 2024]
+Error in rule run_cr:
+    jobid: 1
+    output: control_9_retina
+    shell:
+        
+    cellranger-arc count --id=control_9_retina                          --reference=../CellRangerFiles/refdata-cellranger-arc-GRCh38-2020-A-2.0.0/                          --libraries=libraries/control_9_retina_libraries.csv                          --localcores=48                          --localmem=64
+    
+        (one of the commands exited with non-zero exit code; note that snakemake uses bash strict mode!)
+
+Error in rule run_cr:
+    jobid: 2
+    output: melas_1_retina
+    shell:
+        
+    cellranger-arc count --id=melas_1_retina                          --reference=../CellRangerFiles/refdata-cellranger-arc-GRCh38-2020-A-2.0.0/                          --libraries=libraries/melas_1_retina_libraries.csv                          --localcores=48                          --localmem=64
+    
+        (one of the commands exited with non-zero exit code; note that snakemake uses bash strict mode!)
+
+Shutting down, this might take some time.
+Exiting because a job execution failed. Look above for error message
+Complete log: .snakemake/log/2024-07-14T125344.113762.snakemake.log
+WorkflowError:
+At least one job did not complete successfully.

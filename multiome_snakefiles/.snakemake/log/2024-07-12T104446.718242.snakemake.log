@@ -1,0 +1,48 @@
+Building DAG of jobs...
+Using shell: /usr/bin/bash
+Provided cores: 1 (use --cores to define parallelism)
+Rules claiming more threads will be scaled down.
+Job stats:
+job                     count
+--------------------  -------
+all                         1
+create_libraries_csv        1
+make_directories            1
+total                       3
+
+Select jobs to execute...
+Execute 1 jobs...
+
+[Fri Jul 12 10:44:46 2024]
+localrule make_directories:
+    input: GSE202747_metadata.csv
+    output: tissues/control_3_purified_rpe, tissues/control_9_retina, tissues/melas_1_purified_rpe, tissues/control_10_rpe_choroid, tissues/melas_1_rpe_choroid_rep2, tissues/control_2_rpe_choroid, tissues/control_9_rpe_choroid, tissues/control_10_retina, tissues/melas_1_rpe_choroid_rep1, tissues/melas_1_retina
+    jobid: 2
+    reason: Missing output files: tissues/melas_1_rpe_choroid_rep2, tissues/control_9_rpe_choroid, tissues/control_9_retina, tissues/melas_1_purified_rpe, tissues/control_3_purified_rpe, tissues/melas_1_rpe_choroid_rep1, tissues/control_2_rpe_choroid, tissues/control_10_retina, tissues/melas_1_retina, tissues/control_10_rpe_choroid
+    resources: tmpdir=/tmp
+
+[Fri Jul 12 10:44:47 2024]
+Finished job 2.
+1 of 3 steps (33%) done
+Select jobs to execute...
+Execute 1 jobs...
+
+[Fri Jul 12 10:44:47 2024]
+localrule create_libraries_csv:
+    input: tissues/control_3_purified_rpe, tissues/control_9_retina, tissues/melas_1_purified_rpe, tissues/control_10_rpe_choroid, tissues/melas_1_rpe_choroid_rep2, tissues/control_2_rpe_choroid, tissues/control_9_rpe_choroid, tissues/control_10_retina, tissues/melas_1_rpe_choroid_rep1, tissues/melas_1_retina
+    output: libraries/control_3_purified_rpe_libraries.csv, libraries/control_9_retina_libraries.csv, libraries/melas_1_purified_rpe_libraries.csv, libraries/control_10_rpe_choroid_libraries.csv, libraries/melas_1_rpe_choroid_rep2_libraries.csv, libraries/control_2_rpe_choroid_libraries.csv, libraries/control_9_rpe_choroid_libraries.csv, libraries/control_10_retina_libraries.csv, libraries/melas_1_rpe_choroid_rep1_libraries.csv, libraries/melas_1_retina_libraries.csv
+    jobid: 1
+    reason: Missing output files: libraries/control_9_retina_libraries.csv, libraries/melas_1_rpe_choroid_rep2_libraries.csv, libraries/control_3_purified_rpe_libraries.csv, libraries/control_10_retina_libraries.csv, libraries/control_2_rpe_choroid_libraries.csv, libraries/melas_1_purified_rpe_libraries.csv, libraries/control_9_rpe_choroid_libraries.csv, libraries/melas_1_retina_libraries.csv, libraries/control_10_rpe_choroid_libraries.csv, libraries/melas_1_rpe_choroid_rep1_libraries.csv; Input files updated by another job: tissues/melas_1_rpe_choroid_rep2, tissues/control_9_rpe_choroid, tissues/control_9_retina, tissues/melas_1_purified_rpe, tissues/control_3_purified_rpe, tissues/melas_1_retina, tissues/melas_1_rpe_choroid_rep1, tissues/control_2_rpe_choroid, tissues/control_10_retina, tissues/control_10_rpe_choroid
+    resources: tmpdir=/tmp
+
+[Fri Jul 12 10:44:48 2024]
+Error in rule create_libraries_csv:
+    jobid: 1
+    input: tissues/control_3_purified_rpe, tissues/control_9_retina, tissues/melas_1_purified_rpe, tissues/control_10_rpe_choroid, tissues/melas_1_rpe_choroid_rep2, tissues/control_2_rpe_choroid, tissues/control_9_rpe_choroid, tissues/control_10_retina, tissues/melas_1_rpe_choroid_rep1, tissues/melas_1_retina
+    output: libraries/control_3_purified_rpe_libraries.csv, libraries/control_9_retina_libraries.csv, libraries/melas_1_purified_rpe_libraries.csv, libraries/control_10_rpe_choroid_libraries.csv, libraries/melas_1_rpe_choroid_rep2_libraries.csv, libraries/control_2_rpe_choroid_libraries.csv, libraries/control_9_rpe_choroid_libraries.csv, libraries/control_10_retina_libraries.csv, libraries/melas_1_rpe_choroid_rep1_libraries.csv, libraries/melas_1_retina_libraries.csv
+
+Shutting down, this might take some time.
+Exiting because a job execution failed. Look above for error message
+Complete log: .snakemake/log/2024-07-12T104446.718242.snakemake.log
+WorkflowError:
+At least one job did not complete successfully.

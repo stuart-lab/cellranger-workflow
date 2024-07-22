@@ -1,0 +1,51 @@
+Building DAG of jobs...
+Using shell: /usr/bin/bash
+Provided cores: 48
+Rules claiming more threads will be scaled down.
+Job stats:
+job       count
+------  -------
+all           1
+run_cr        2
+total         3
+
+Select jobs to execute...
+Execute 2 jobs...
+
+[Mon Jul 22 10:15:20 2024]
+localrule run_cr:
+    output: melas_1_retina
+    jobid: 1
+    reason: Missing output files: melas_1_retina
+    wildcards: id=melas_1_retina
+    resources: tmpdir=/tmp, load=50
+
+
+[Mon Jul 22 10:15:20 2024]
+localrule run_cr:
+    output: control_9_retina
+    jobid: 2
+    reason: Missing output files: control_9_retina
+    wildcards: id=control_9_retina
+    resources: tmpdir=/tmp, load=50
+
+[Mon Jul 22 13:48:23 2024]
+Finished job 2.
+1 of 3 steps (33%) done
+[Mon Jul 22 15:27:53 2024]
+Finished job 1.
+2 of 3 steps (67%) done
+Select jobs to execute...
+Execute 1 jobs...
+
+[Mon Jul 22 15:27:53 2024]
+localrule all:
+    input: melas_1_retina, control_9_retina
+    jobid: 0
+    reason: Input files updated by another job: melas_1_retina, control_9_retina
+    resources: tmpdir=/tmp
+
+[Mon Jul 22 15:27:53 2024]
+Finished job 0.
+3 of 3 steps (100%) done
+Complete log: .snakemake/log/2024-07-22T101520.397675.snakemake.log

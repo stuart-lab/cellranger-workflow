@@ -1,0 +1,25 @@
+Building DAG of jobs...
+Using shell: /usr/bin/bash
+Provided cores: 1 (use --cores to define parallelism)
+Rules claiming more threads will be scaled down.
+Job stats:
+job                 count
+----------------  -------
+make_directories        1
+total                   1
+
+Select jobs to execute...
+Execute 1 jobs...
+
+[Fri Jul 12 10:41:36 2024]
+localrule make_directories:
+    input: GSE202747_metadata.csv
+    output: tissues/melas_1_purified_rpe, tissues/control_2_rpe_choroid, tissues/control_10_rpe_choroid, tissues/control_3_purified_rpe, tissues/control_9_retina, tissues/melas_1_rpe_choroid_rep2, tissues/control_9_rpe_choroid, tissues/melas_1_retina, tissues/melas_1_rpe_choroid_rep1, tissues/control_10_retina
+    jobid: 0
+    reason: Missing output files: tissues/melas_1_purified_rpe, tissues/control_2_rpe_choroid, tissues/control_9_rpe_choroid, tissues/melas_1_rpe_choroid_rep2, tissues/control_3_purified_rpe, tissues/melas_1_rpe_choroid_rep1, tissues/control_9_retina, tissues/control_10_retina, tissues/control_10_rpe_choroid, tissues/melas_1_retina
+    resources: tmpdir=/tmp
+
+[Fri Jul 12 10:41:37 2024]
+Finished job 0.
+1 of 1 steps (100%) done
+Complete log: .snakemake/log/2024-07-12T104136.629813.snakemake.log

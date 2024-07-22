@@ -1,0 +1,78 @@
+Building DAG of jobs...
+Using shell: /usr/bin/bash
+Provided cores: 128
+Rules claiming more threads will be scaled down.
+Job stats:
+job                     count
+--------------------  -------
+all                         1
+create_libraries_csv        2
+prefetch                    2
+total                       5
+
+Select jobs to execute...
+Execute 2 jobs...
+
+[Fri Jul 12 13:01:27 2024]
+localrule create_libraries_csv:
+    output: libraries/control_9_retina_libraries.csv
+    jobid: 2
+    reason: Missing output files: libraries/control_9_retina_libraries.csv
+    wildcards: id=control_9_retina
+    resources: tmpdir=/tmp
+
+
+[Fri Jul 12 13:01:27 2024]
+localrule create_libraries_csv:
+    output: libraries/melas_1_retina_libraries.csv
+    jobid: 4
+    reason: Missing output files: libraries/melas_1_retina_libraries.csv
+    wildcards: id=melas_1_retina
+    resources: tmpdir=/tmp
+
+[Fri Jul 12 13:01:27 2024]
+Finished job 4.
+1 of 5 steps (20%) done
+Select jobs to execute...
+Execute 1 jobs...
+
+[Fri Jul 12 13:01:27 2024]
+localrule prefetch:
+    input: libraries/melas_1_retina_libraries.csv
+    output: tissues/melas_1_retina/atac_seq, tissues/melas_1_retina/rna_seq
+    jobid: 3
+    reason: Missing output files: tissues/melas_1_retina/rna_seq, tissues/melas_1_retina/atac_seq; Input files updated by another job: libraries/melas_1_retina_libraries.csv
+    wildcards: id=melas_1_retina
+    resources: tmpdir=/tmp
+
+[Fri Jul 12 13:01:27 2024]
+Finished job 2.
+2 of 5 steps (40%) done
+Select jobs to execute...
+Execute 1 jobs...
+
+[Fri Jul 12 13:01:27 2024]
+localrule prefetch:
+    input: libraries/control_9_retina_libraries.csv
+    output: tissues/control_9_retina/atac_seq, tissues/control_9_retina/rna_seq
+    jobid: 1
+    reason: Missing output files: tissues/control_9_retina/rna_seq, tissues/control_9_retina/atac_seq; Input files updated by another job: libraries/control_9_retina_libraries.csv
+    wildcards: id=control_9_retina
+    resources: tmpdir=/tmp
+
+Terminating processes on user request, this might take some time.
+[Fri Jul 12 13:52:17 2024]
+Error in rule prefetch:
+    jobid: 3
+    input: libraries/melas_1_retina_libraries.csv
+    output: tissues/melas_1_retina/atac_seq, tissues/melas_1_retina/rna_seq
+
+[Fri Jul 12 13:52:17 2024]
+Error in rule prefetch:
+    jobid: 1
+    input: libraries/control_9_retina_libraries.csv
+    output: tissues/control_9_retina/atac_seq, tissues/control_9_retina/rna_seq
+
+Complete log: .snakemake/log/2024-07-12T130127.271341.snakemake.log
+WorkflowError:
+At least one job did not complete successfully.

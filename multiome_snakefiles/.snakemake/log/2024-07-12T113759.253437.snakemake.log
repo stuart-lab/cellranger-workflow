@@ -1,0 +1,49 @@
+Building DAG of jobs...
+Using shell: /usr/bin/bash
+Provided cores: 2
+Rules claiming more threads will be scaled down.
+Job stats:
+job              count
+-------------  -------
+all                  1
+prefetch_atac       10
+total               11
+
+Select jobs to execute...
+Execute 2 jobs...
+
+[Fri Jul 12 11:37:59 2024]
+localrule prefetch_atac:
+    input: tissues
+    output: tissues/control_10_rpe_choroid/atac_seq, tissues/control_10_rpe_choroid/rna_seq
+    jobid: 9
+    reason: Missing output files: tissues/control_10_rpe_choroid/atac_seq, tissues/control_10_rpe_choroid/rna_seq
+    wildcards: id=control_10_rpe_choroid
+    resources: tmpdir=/tmp
+
+
+[Fri Jul 12 11:37:59 2024]
+localrule prefetch_atac:
+    input: tissues
+    output: tissues/control_9_retina/atac_seq, tissues/control_9_retina/rna_seq
+    jobid: 2
+    reason: Missing output files: tissues/control_9_retina/atac_seq, tissues/control_9_retina/rna_seq
+    wildcards: id=control_9_retina
+    resources: tmpdir=/tmp
+
+Terminating processes on user request, this might take some time.
+[Fri Jul 12 11:38:13 2024]
+[Fri Jul 12 11:38:13 2024]
+Error in rule prefetch_atac:
+    jobid: 2
+    input: tissues
+    output: tissues/control_9_retina/atac_seq, tissues/control_9_retina/rna_seq
+
+Error in rule prefetch_atac:
+    jobid: 9
+    input: tissues
+    output: tissues/control_10_rpe_choroid/atac_seq, tissues/control_10_rpe_choroid/rna_seq
+
+Complete log: .snakemake/log/2024-07-12T113759.253437.snakemake.log
+WorkflowError:
+At least one job did not complete successfully.

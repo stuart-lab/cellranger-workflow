@@ -1,0 +1,33 @@
+Building DAG of jobs...
+Using shell: /usr/bin/bash
+Provided cores: 128
+Rules claiming more threads will be scaled down.
+Job stats:
+job                     count
+--------------------  -------
+all                         1
+create_libraries_csv        1
+prefetch                    2
+rename                      1
+total                       5
+
+Select jobs to execute...
+Execute 1 jobs...
+
+[Sat Jul 13 14:07:38 2024]
+localrule create_libraries_csv:
+    output: libraries/control_9_retina_libraries.csv, libraries/melas_1_retina_libraries.csv
+    jobid: 3
+    reason: Missing output files: libraries/melas_1_retina_libraries.csv, libraries/control_9_retina_libraries.csv; Code has changed since last execution
+    resources: tmpdir=/tmp
+
+[Sat Jul 13 14:07:38 2024]
+Error in rule create_libraries_csv:
+    jobid: 3
+    output: libraries/control_9_retina_libraries.csv, libraries/melas_1_retina_libraries.csv
+
+Shutting down, this might take some time.
+Exiting because a job execution failed. Look above for error message
+Complete log: .snakemake/log/2024-07-13T140738.192689.snakemake.log
+WorkflowError:
+At least one job did not complete successfully.
