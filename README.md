@@ -26,10 +26,10 @@ Depending on the type of data being processed (Multiome vs ATAC-seq), download t
 
 ATAC:
 
-![plot](./set_up.PNG)
+![plot](./run_cr_atac.PNG)
 
 Multiome:
 
-![plot](./run_cr_atac.PNG)
+![plot](./set_up.PNG)
 
 ### More detailed instructions are in respective README files.
