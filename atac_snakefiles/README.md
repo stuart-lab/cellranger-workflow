@@ -1,7 +1,7 @@
 # Pipeline to process ATAC-Seq data 
 
 ## Important: the rule "rename_fastq_files" in "get_atac.snakefile" needs to be amended depending on reads given in SRA run selector.
-E.g. some SRR's may have index reads, some may not.
+E.g. some SRR's may have index reads, some may not. File naming convention: https://www.10xgenomics.com/support/software/cell-ranger-arc/latest/tutorials/inputs/specifying-input-fastq-count
 
 ### Setup
 
