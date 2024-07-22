@@ -1,5 +1,8 @@
 # Pipeline to process ATAC-Seq data 
 
+## Important: the rule "rename_fastq_files" in "get_atac.snakefile" needs to be amended depending on reads given in SRA run selector.
+E.g. some SRR's may have index reads, some may not.
+
 ### Setup
 
 In the config.yaml file, with reference to location of scripts, change cd to **absolute** path, and ref_genome to **relative** path.
@@ -19,4 +22,5 @@ snakemake --cores all --keep-incomplete --resources load=100 -s run_cr_atac.snak
 ##it is suggested to run on HPC using cr_slurmtemplate.sbatch - to run:
 sbatch cr_slurmtemplate.sbatch
 ```
+
 
