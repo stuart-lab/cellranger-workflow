@@ -17,7 +17,7 @@ snakemake -p --dry-run -s <insert snakefile name>
 
 **Instructions**
 
-Depending on the type of data being processed (Multiome vs ATAC-seq), download the relevant folder.
+Depending on the type of data being processed (Multiome vs ATAC-seq), download relevant folder(s).
 
 **Workflow**
 
