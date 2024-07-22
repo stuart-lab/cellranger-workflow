@@ -14,13 +14,10 @@ snakemake -p --dry-run -s <insert snakefile name>
 | Snakemake     |https://snakemake.readthedocs.io/en/stable/                                |
 | PigZ          |https://zlib.net/pigz/                                                     |
 
-**Setup**
-
-In the config.yaml file, with reference to location of scripts, change cd to absolute path, and ref_genome to relative path.
 
 **Instructions**
 
-Depending on the type of data being processed (Multiome vs ATAC-seq), download the relevant snakefiles; instructions in respective files.
+Depending on the type of data being processed (Multiome vs ATAC-seq), download the relevant folder.
 
 **Workflow**
 
