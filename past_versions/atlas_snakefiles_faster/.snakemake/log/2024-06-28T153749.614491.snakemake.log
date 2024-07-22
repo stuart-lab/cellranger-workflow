@@ -1,0 +1,71 @@
+Building DAG of jobs...
+Using shell: /usr/bin/bash
+Provided cores: 48
+Rules claiming more threads will be scaled down.
+Job stats:
+job                   count
+------------------  -------
+all                       1
+fastq_dump_rna            1
+prefetch_rna              1
+rename_fastq_files        1
+total                     4
+
+Select jobs to execute...
+Execute 1 jobs...
+
+[Fri Jun 28 15:37:49 2024]
+localrule prefetch_rna:
+    output: rna_seq/SRR17909494/SRR17909494.sra
+    jobid: 3
+    reason: Missing output files: rna_seq/SRR17909494/SRR17909494.sra
+    wildcards: srr=SRR17909494
+    resources: tmpdir=/tmp
+
+[Fri Jun 28 16:41:38 2024]
+Finished job 3.
+1 of 4 steps (25%) done
+Select jobs to execute...
+Execute 1 jobs...
+
+[Fri Jun 28 16:41:38 2024]
+localrule fastq_dump_rna:
+    input: rna_seq/SRR17909494/SRR17909494.sra
+    output: rna_seq/SRR17909494/SRR17909494_1.fastq, rna_seq/SRR17909494/SRR17909494_2.fastq, rna_seq/SRR17909494/SRR17909494_3.fastq, rna_seq/SRR17909494/SRR17909494_4.fastq
+    jobid: 2
+    reason: Missing output files: rna_seq/SRR17909494/SRR17909494_3.fastq, rna_seq/SRR17909494/SRR17909494_2.fastq, rna_seq/SRR17909494/SRR17909494_4.fastq, rna_seq/SRR17909494/SRR17909494_1.fastq; Input files updated by another job: rna_seq/SRR17909494/SRR17909494.sra
+    wildcards: srr=SRR17909494
+    resources: tmpdir=/tmp
+
+[Fri Jun 28 16:46:42 2024]
+Finished job 2.
+2 of 4 steps (50%) done
+Select jobs to execute...
+Execute 1 jobs...
+
+[Fri Jun 28 16:46:42 2024]
+localrule rename_fastq_files:
+    input: rna_seq/SRR17909494/SRR17909494_1.fastq, rna_seq/SRR17909494/SRR17909494_2.fastq, rna_seq/SRR17909494/SRR17909494_3.fastq, rna_seq/SRR17909494/SRR17909494_4.fastq
+    output: rna_seq/SRR17909494/SRR17909494_S1_L001_I1_001.fastq, rna_seq/SRR17909494/SRR17909494_S1_L001_I2_001.fastq, rna_seq/SRR17909494/SRR17909494_S1_L001_R1_001.fastq, rna_seq/SRR17909494/SRR17909494_S1_L001_R2_001.fastq
+    jobid: 1
+    reason: Missing output files: rna_seq/SRR17909494/SRR17909494_S1_L001_R2_001.fastq, rna_seq/SRR17909494/SRR17909494_S1_L001_R1_001.fastq, rna_seq/SRR17909494/SRR17909494_S1_L001_I1_001.fastq, rna_seq/SRR17909494/SRR17909494_S1_L001_I2_001.fastq; Input files updated by another job: rna_seq/SRR17909494/SRR17909494_3.fastq, rna_seq/SRR17909494/SRR17909494_2.fastq, rna_seq/SRR17909494/SRR17909494_4.fastq, rna_seq/SRR17909494/SRR17909494_1.fastq
+    wildcards: srr=SRR17909494
+    resources: tmpdir=/tmp
+
+[Fri Jun 28 16:46:42 2024]
+Finished job 1.
+3 of 4 steps (75%) done
+Select jobs to execute...
+Execute 1 jobs...
+
+[Fri Jun 28 16:46:42 2024]
+localrule all:
+    input: rna_seq/SRR17909494/SRR17909494_S1_L001_I1_001.fastq, rna_seq/SRR17909494/SRR17909494_S1_L001_I2_001.fastq, rna_seq/SRR17909494/SRR17909494_S1_L001_R1_001.fastq, rna_seq/SRR17909494/SRR17909494_S1_L001_R2_001.fastq
+    jobid: 0
+    reason: Input files updated by another job: rna_seq/SRR17909494/SRR17909494_S1_L001_R1_001.fastq, rna_seq/SRR17909494/SRR17909494_S1_L001_R2_001.fastq, rna_seq/SRR17909494/SRR17909494_S1_L001_I1_001.fastq, rna_seq/SRR17909494/SRR17909494_S1_L001_I2_001.fastq
+    resources: tmpdir=/tmp
+
+[Fri Jun 28 16:46:42 2024]
+Finished job 0.
+4 of 4 steps (100%) done
+Complete log: .snakemake/log/2024-06-28T153749.614491.snakemake.log

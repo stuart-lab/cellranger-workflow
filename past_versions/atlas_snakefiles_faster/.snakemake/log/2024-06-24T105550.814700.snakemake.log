@@ -1,0 +1,36 @@
+Building DAG of jobs...
+Using shell: /usr/bin/bash
+Provided cores: 1 (use --cores to define parallelism)
+Rules claiming more threads will be scaled down.
+Job stats:
+job              count
+-------------  -------
+all                  1
+prefetch_atac        2
+total                3
+
+Select jobs to execute...
+Execute 1 jobs...
+
+[Mon Jun 24 10:55:50 2024]
+localrule prefetch_atac:
+    output: atac_seq/SRR17909502/SRR17909502.sra
+    jobid: 1
+    reason: Missing output files: atac_seq/SRR17909502/SRR17909502.sra
+    wildcards: srr=SRR17909502
+    resources: tmpdir=/tmp
+
+Terminating processes on user request, this might take some time.
+[Mon Jun 24 10:56:07 2024]
+Error in rule prefetch_atac:
+    jobid: 1
+    output: atac_seq/SRR17909502/SRR17909502.sra
+    shell:
+        
+      prefetch SRR17909502 --max-size 50G -O atac_seq/SRR17909502
+      
+        (one of the commands exited with non-zero exit code; note that snakemake uses bash strict mode!)
+
+Complete log: .snakemake/log/2024-06-24T105550.814700.snakemake.log
+WorkflowError:
+At least one job did not complete successfully.

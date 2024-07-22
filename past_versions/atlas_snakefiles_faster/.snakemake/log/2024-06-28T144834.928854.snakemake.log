@@ -1,0 +1,61 @@
+Building DAG of jobs...
+Using shell: /usr/bin/bash
+Provided cores: 48
+Rules claiming more threads will be scaled down.
+Job stats:
+job                     count
+--------------------  -------
+all                         1
+create_libraries_csv        1
+get_files_atac              1
+get_files_rna               1
+run_cr                      1
+total                       5
+
+Select jobs to execute...
+Execute 2 jobs...
+
+[Fri Jun 28 14:48:35 2024]
+localrule get_files_rna:
+    output: rna_seq
+    jobid: 4
+    reason: Missing output files: rna_seq
+    resources: tmpdir=/tmp
+
+
+[Fri Jun 28 14:48:35 2024]
+localrule get_files_atac:
+    output: atac_seq
+    jobid: 3
+    reason: Missing output files: atac_seq
+    resources: tmpdir=/tmp
+
+[Fri Jun 28 15:28:15 2024]
+Error in rule get_files_atac:
+    jobid: 3
+    output: atac_seq
+    shell:
+        
+    snakemake --cores all -s get_atac.snakefile
+    
+        (one of the commands exited with non-zero exit code; note that snakemake uses bash strict mode!)
+
+Removing output files of failed job get_files_atac since they might be corrupted:
+atac_seq
+[Fri Jun 28 15:30:55 2024]
+Error in rule get_files_rna:
+    jobid: 4
+    output: rna_seq
+    shell:
+        
+    snakemake --cores all -s get_rna.snakefile
+    
+        (one of the commands exited with non-zero exit code; note that snakemake uses bash strict mode!)
+
+Removing output files of failed job get_files_rna since they might be corrupted:
+rna_seq
+Shutting down, this might take some time.
+Exiting because a job execution failed. Look above for error message
+Complete log: .snakemake/log/2024-06-28T144834.928854.snakemake.log
+WorkflowError:
+At least one job did not complete successfully.
