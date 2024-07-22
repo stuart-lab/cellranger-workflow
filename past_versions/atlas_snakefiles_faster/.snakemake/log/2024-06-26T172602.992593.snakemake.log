@@ -1,0 +1,53 @@
+Building DAG of jobs...
+Using shell: /usr/bin/bash
+Provided cores: 1 (use --cores to define parallelism)
+Rules claiming more threads will be scaled down.
+Job stats:
+job                     count
+--------------------  -------
+all                         1
+create_libraries_csv        2
+total                       3
+
+Select jobs to execute...
+Execute 1 jobs...
+
+[Wed Jun 26 17:26:03 2024]
+localrule create_libraries_csv:
+    output: SRR17909503_SRR17909495_libraries.csv
+    jobid: 2
+    reason: Forced execution
+    wildcards: atac_srr=SRR17909503, rna_srr=SRR17909495
+    resources: tmpdir=/tmp
+
+[Wed Jun 26 17:26:03 2024]
+Finished job 2.
+1 of 3 steps (33%) done
+Select jobs to execute...
+Execute 1 jobs...
+
+[Wed Jun 26 17:26:03 2024]
+localrule create_libraries_csv:
+    output: SRR17909502_SRR17909494_libraries.csv
+    jobid: 1
+    reason: Forced execution
+    wildcards: atac_srr=SRR17909502, rna_srr=SRR17909494
+    resources: tmpdir=/tmp
+
+[Wed Jun 26 17:26:03 2024]
+Finished job 1.
+2 of 3 steps (67%) done
+Select jobs to execute...
+Execute 1 jobs...
+
+[Wed Jun 26 17:26:03 2024]
+localrule all:
+    input: SRR17909502_SRR17909494_libraries.csv, SRR17909503_SRR17909495_libraries.csv
+    jobid: 0
+    reason: Input files updated by another job: SRR17909503_SRR17909495_libraries.csv, SRR17909502_SRR17909494_libraries.csv
+    resources: tmpdir=/tmp
+
+[Wed Jun 26 17:26:03 2024]
+Finished job 0.
+3 of 3 steps (100%) done
+Complete log: .snakemake/log/2024-06-26T172602.992593.snakemake.log

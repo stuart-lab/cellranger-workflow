@@ -1,0 +1,51 @@
+Building DAG of jobs...
+Using shell: /usr/bin/bash
+Provided cores: 48
+Rules claiming more threads will be scaled down.
+Job stats:
+job                   count
+------------------  -------
+all                       1
+fastq_dump_rna            1
+prefetch_rna              1
+rename_fastq_files        1
+total                     4
+
+Select jobs to execute...
+Execute 1 jobs...
+
+[Fri Jun 28 14:48:35 2024]
+localrule prefetch_rna:
+    output: rna_seq/SRR17909494/SRR17909494.sra
+    jobid: 3
+    reason: Missing output files: rna_seq/SRR17909494/SRR17909494.sra
+    wildcards: srr=SRR17909494
+    resources: tmpdir=/tmp
+
+[Fri Jun 28 15:27:01 2024]
+Finished job 3.
+1 of 4 steps (25%) done
+Select jobs to execute...
+Execute 1 jobs...
+
+[Fri Jun 28 15:27:01 2024]
+localrule fastq_dump_rna:
+    input: rna_seq/SRR17909494/SRR17909494.sra
+    output: rna_seq/SRR17909494/SRR17909494_1.fastq, rna_seq/SRR17909494/SRR17909494_2.fastq, rna_seq/SRR17909494/SRR17909494_3.fastq, rna_seq/SRR17909494/SRR17909494_4.fastq
+    jobid: 2
+    reason: Missing output files: rna_seq/SRR17909494/SRR17909494_4.fastq, rna_seq/SRR17909494/SRR17909494_2.fastq, rna_seq/SRR17909494/SRR17909494_1.fastq, rna_seq/SRR17909494/SRR17909494_3.fastq; Input files updated by another job: rna_seq/SRR17909494/SRR17909494.sra
+    wildcards: srr=SRR17909494
+    resources: tmpdir=/tmp
+
+Waiting at most 5 seconds for missing files.
+MissingOutputException in rule fastq_dump_rna in file /charonfs/scratch/users/astar/gis/stufrancis/atlas_snakefiles_faster/get_rna.snakefile, line 26:
+Job 2  completed successfully, but some output files are missing. Missing files after 5 seconds. This might be due to filesystem latency. If that is the case, consider to increase the wait time with --latency-wait:
+rna_seq/SRR17909494/SRR17909494_1.fastq (missing locally, parent dir contents: SRR17909494_4.fastq, SRR17909494.sra, SRR17909494_3.fastq)
+rna_seq/SRR17909494/SRR17909494_2.fastq (missing locally, parent dir contents: SRR17909494_4.fastq, SRR17909494.sra, SRR17909494_3.fastq)
+Removing output files of failed job fastq_dump_rna since they might be corrupted:
+rna_seq/SRR17909494/SRR17909494_3.fastq, rna_seq/SRR17909494/SRR17909494_4.fastq
+Shutting down, this might take some time.
+Exiting because a job execution failed. Look above for error message
+Complete log: .snakemake/log/2024-06-28T144835.365582.snakemake.log
+WorkflowError:
+At least one job did not complete successfully.

@@ -1,0 +1,36 @@
+Building DAG of jobs...
+Using shell: /usr/bin/bash
+Provided cores: 1 (use --cores to define parallelism)
+Rules claiming more threads will be scaled down.
+Job stats:
+job       count
+------  -------
+all           1
+run_cr        2
+total         3
+
+Select jobs to execute...
+Execute 1 jobs...
+
+[Wed Jun 26 17:23:10 2024]
+localrule run_cr:
+    output: SRR17909503_SRR17909495
+    jobid: 2
+    reason: Missing output files: SRR17909503_SRR17909495
+    wildcards: atac_srr=SRR17909503, rna_srr=SRR17909495
+    resources: tmpdir=/tmp
+
+[Wed Jun 26 17:23:10 2024]
+Error in rule run_cr:
+    jobid: 2
+    output: SRR17909503_SRR17909495
+    shell:
+        
+    cellranger-arc count --id=SRR17909503_SRR17909495                          --reference=refdata-cellranger-arc-GRCh38-2020-A-2.0.0                          --libraries=SRR17909503_SRR17909495_libraries.csv     
+        (one of the commands exited with non-zero exit code; note that snakemake uses bash strict mode!)
+
+Shutting down, this might take some time.
+Exiting because a job execution failed. Look above for error message
+Complete log: .snakemake/log/2024-06-26T172310.236362.snakemake.log
+WorkflowError:
+At least one job did not complete successfully.
