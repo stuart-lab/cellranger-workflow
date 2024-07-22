@@ -25,9 +25,11 @@ Depending on the type of data being processed (Multiome vs ATAC-seq), download t
 **Workflow**
 
 ATAC:
+
 ![plot](./set_up.PNG)
 
 Multiome:
+
 ![plot](./run_cr_atac.PNG)
 
 ### More detailed instructions are in respective README files.
