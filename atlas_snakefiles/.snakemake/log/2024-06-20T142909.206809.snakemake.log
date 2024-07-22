@@ -1,0 +1,35 @@
+Building DAG of jobs...
+Using shell: /usr/bin/bash
+Provided cores: 1 (use --cores to define parallelism)
+Rules claiming more threads will be scaled down.
+Job stats:
+job            count
+-----------  -------
+all                1
+read_tissue        7
+total              8
+
+Select jobs to execute...
+Execute 1 jobs...
+
+[Thu Jun 20 14:29:09 2024]
+localrule read_tissue:
+    output: SRR17909503.txt
+    jobid: 2
+    reason: Missing output files: SRR17909503.txt; Code has changed since last execution
+    wildcards: b=SRR17909503
+    resources: tmpdir=/tmp
+
+ImproperOutputException in rule read_tissue in file /charonfs/scratch/users/astar/gis/stufrancis/snakemake_tutorial/Snakefile, line 11:
+Outputs of incorrect type (directories when expecting files or vice versa). Output directories must be flagged with directory(). for rule read_tissue:
+    output: SRR17909503.txt
+    wildcards: b=SRR17909503
+    affected files:
+        SRR17909503.txt
+Removing output files of failed job read_tissue since they might be corrupted:
+SRR17909503.txt
+Shutting down, this might take some time.
+Exiting because a job execution failed. Look above for error message
+Complete log: .snakemake/log/2024-06-20T142909.206809.snakemake.log
+WorkflowError:
+At least one job did not complete successfully.
