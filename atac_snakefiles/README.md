@@ -6,8 +6,8 @@ In the config.yaml file, with reference to location of scripts, change cd to **a
 
 **Instructions**
 
-How to use:
-1) Paste "SRR" accession numbers in "atac_accessions.txt" (SRR accession numbers can be obtained from SRA run selector). \n
+### How to use:
+1) Paste "SRR" accession numbers in "atac_accessions.txt" (SRR accession numbers can be obtained from SRA run selector).
 2) Let the HPC cook.
 3) Output files that are important: metrics.csv, fragment file.tsv.gz & .tsv.gz.tbi, filtered_matrix.h5. Move to downstream analysis.
 
