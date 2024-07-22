@@ -4,6 +4,7 @@
 E.g. some SRR's may have index reads, some may not. File naming convention: https://www.10xgenomics.com/support/software/cell-ranger-arc/latest/tutorials/inputs/specifying-input-fastq-count
 
 **Instructions**
+
 How to use:
 1)  Set-up a file similar to "GSE202747_metadata.csv"; a sample R script written by Dr Ramasamy is given. (credits: https://www.a-star.edu.sg/gis/our-people/platform-leaders/members-page/adaikalavan-ramasamy)
 2)  Run set_up.snakefile first. This will set up a file strcuture in this way:
@@ -23,10 +24,6 @@ How to use:
 |prefetch             |downloads all the SRR files                                         |
 |rename               |Renames files for CR; ".sh" used, snakemake bad at renaming files   |
 
-
-**Workflow**
-
-![plot](./run_cr.PNG)
 
 
 **To run**
