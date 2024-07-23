@@ -1,7 +1,7 @@
 # retina-atlas
 All files stored in "atlas_snakefiles_faster" directory
 
-**To debug**
+## To debug
 ```
 snakemake -p --dry-run -s <insert snakefile name>
 ```
@@ -15,14 +15,14 @@ snakemake -p --dry-run -s <insert snakefile name>
 | PigZ          |https://zlib.net/pigz/                                                     |
 
 
-**Instructions**
+## Instructions
 
 Depending on the type of data being processed (Multiome vs ATAC-seq), download relevant folder(s).
 
-**Workflow**
+## Snakemake rule pipeline
 
 ATAC:                      |  Multiome:
 :-------------------------:|:-------------------------:
 ![plot](./run_cr_atac.PNG) |  ![plot](./set_up.PNG)
 
-### More detailed instructions are in respective README files.
+### More detailed instructions in subfiles.
