@@ -1,5 +1,5 @@
 # retina-atlas
-All files stored in "atlas_snakefiles_faster" directory
+Pipelines for processing sc-multiome and sc-atacseq data using CellRanger
 
 ## To debug
 ```
