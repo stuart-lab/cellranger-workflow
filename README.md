@@ -6,6 +6,12 @@ Pipelines for processing sc-multiome and sc-atacseq data using CellRanger
 snakemake -p --dry-run -s <insert snakefile name>
 ```
 
+## Load management when running CellRanger
+CellRanger takes up a lot of resources, so must add resources flag when running run_cr snakefile.
+```
+snakemake --cores all --keep-incomplete --resources load=100 -s run_cr_atac.snakefile
+```
+
 ## Dependencies
 | Dependencies  |Link                                                                       |
 |:--------------|:-------------------------------------------------------------------       |
