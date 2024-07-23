@@ -5,7 +5,8 @@ All files stored in "atlas_snakefiles_faster" directory
 ```
 snakemake -p --dry-run -s <insert snakefile name>
 ```
-**Dependencies**
+
+## Dependencies
 | Dependencies  |Link                                                                       |
 |:--------------|:-------------------------------------------------------------------       |
 | CellRangerARC |https://www.10xgenomics.com/support/software/cell-ranger-arc/latest        |
