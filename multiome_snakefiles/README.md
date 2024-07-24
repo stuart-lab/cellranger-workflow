@@ -1,6 +1,6 @@
 # Pipeline to process Multiome data
 
-### Important: the bash scripts "rename_rna.sh" & "rename_atac.sh" need to be amended depending on reads given in SRA run selector.
+### Important: bash scripts "rename_rna.sh" & "rename_atac.sh" to be amended depending on reads given in SRA run selector.
 E.g. some SRR's may have index reads, some may not. File naming convention: https://www.10xgenomics.com/support/software/cell-ranger-arc/latest/tutorials/inputs/specifying-input-fastq-count
 
 **Instructions**
@@ -29,7 +29,7 @@ How to use:
 **To run**
 ```
 ##some rules need to be edited as pipeline is catered to "GSE202747_metadata.csv"
-snakemake --cores all --keep-incomplete -s run_cr_atac.snakefile
+snakemake --cores all --keep-incomplete -s set_up.snakefile
 snakemake --cores all --keep-incomplete --resources load=100 -s run_cr.snakefile
 ```
 
