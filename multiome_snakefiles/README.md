@@ -34,5 +34,5 @@ snakemake --cores all --keep-incomplete --resources load=100 -s run_cr.snakefile
 ```
 
 **For future improvement**
-1) Add config file for ease of use
+1) Add config file for ease of use (**Note**: for custom expts, some paths may be needed to be changed in snakefiles; check home for how to debug) 
 2) Prefetch should run in parallel so it is faster
