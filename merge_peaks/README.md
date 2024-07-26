@@ -39,6 +39,6 @@ Run this workflow after "outs" generated from CellRanger to merge all the data i
 
 ```
 
-mergePeaks_ARC.R can be run now - it will output an ".rds" file with everything merged. 
+mergePeaks_ARC/ATAC can be run now - it will output an ".rds" file with everything merged. 
 
 
