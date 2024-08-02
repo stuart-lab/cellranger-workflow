@@ -1,3 +1,4 @@
+# retina-atlas
 Workflow for processing sc-multiome and sc-atacseq data using CellRanger
 
 ## Dependencies
