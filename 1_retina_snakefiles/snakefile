@@ -1,0 +1,149 @@
+configfile:"config.yaml"
+
+import pandas as pd
+
+# Read the CSV file to extract IDs
+df = pd.read_csv(config["path"]["metadata"])  
+# Extract unique IDs from the 'ID' column
+IDs = set(df["ID"])
+
+rule all:
+    input:
+        expand("{param}/{id}", id  = IDs, param=config["path"]["process_dir"])
+
+#creates libraries.csv file
+rule create_libraries_csv:
+    params:
+        proc_dir=config["path"]["process_dir"],
+        run_type=config["type"]
+    output:
+        "{param}/libraries/{id}_libraries.csv"
+    run:
+        if config["type"]=="multiome" or config["type"]=="ATAC":
+            curr_id = wildcards.id
+            tmp_df = df[df['ID']==f"{curr_id}"]
+
+            atac_srr = tmp_df[tmp_df['library_type'] == 'Chromatin Accessibility']
+            rna_srr = tmp_df[tmp_df['library_type'] == 'Gene Expression']
+
+            with open(output[0], "w") as f:
+                f.write("fastqs,sample,library_type\n")
+                for i in atac_srr['Library']:
+                    f.write(f"{params.proc_dir}/fastq/{wildcards.id}/atac_seq/{i},{i},Chromatin Accessibility\n")
+                for j in rna_srr['Library']:
+                    f.write(f"{params.proc_dir}/fastq/{wildcards.id}/rna_seq/{j},{j},Gene Expression\n")
+        else:
+            print("Please fix config file")
+
+
+#downloads the fastq files
+rule fetch_fastq:
+    input:
+        "{param}/libraries/{id}_libraries.csv"
+    params:
+        proc_dir=config["path"]["process_dir"],
+        run_type=config["type"],
+        ATAC1=config["ATAC1"],
+        ATAC2=config["ATAC2"],
+        ATAC3=config["ATAC3"],
+        ATAC4=config["ATAC4"],
+        RNA1=config["RNA1"],
+        RNA2=config["RNA2"],
+        RNA3=config["RNA3"],
+        RNA4=config["RNA4"]
+    output:
+        directory("{param}/fastq/{id}")
+    run:
+        tmp_df = df[df['ID']==f"{wildcards.id}"]
+
+        for srr_number in tmp_df["Library"]:
+            #lazy change the rest
+            i = srr_number
+            #get library type
+            srr_row_in_df = df[df['Library'] == srr_number]
+            library_type_of_srr = srr_row_in_df['library_type'].values[0]
+            
+            # Download and split files
+            if library_type_of_srr == "Chromatin Accessibility":
+                dest_folder = f"{params.proc_dir}/fastq/{wildcards.id}/atac_seq"
+            else:
+                dest_folder = f"{params.proc_dir}/fastq/{wildcards.id}/rna_seq"
+
+
+            print("--fetching .sra file--")
+            shell(f"prefetch {i} --max-size 100G -O {dest_folder}")
+
+            print("--executing fastq dump--")
+            shell(f"fasterq-dump --split-files --include-technical {dest_folder}/{i}/{i}.sra -O {dest_folder}/{srr_number}")
+
+            # Rename
+            if library_type_of_srr == "Chromatin Accessibility":
+                print("--renaming ATAC files--")
+                if config["ATAC1"]!="ignore":
+                    shell(f"mv {dest_folder}/{i}/{i}_1.fastq {dest_folder}/{i}/{i}_{params.ATAC1}") 
+                if config["ATAC2"]!="ignore":
+                    shell(f"mv {dest_folder}/{i}/{i}_2.fastq {dest_folder}/{i}/{i}_{params.ATAC2}")
+                if config["ATAC3"]!="ignore":
+                    shell(f"mv {dest_folder}/{i}/{i}_3.fastq {dest_folder}/{i}/{i}_{params.ATAC3}")
+                if config["ATAC4"]!="ignore":
+                    shell(f"mv {dest_folder}/{i}/{i}_4.fastq {dest_folder}/{i}/{i}_{params.ATAC4}")
+            elif library_type_of_srr == "Gene Expression":    
+                print("--renaming rna files--")            
+                if config["RNA1"]!="ignore":
+                    shell(f"mv {dest_folder}/{i}/{i}_1.fastq {dest_folder}/{i}/{i}_{params.RNA1}")    
+                if config["RNA2"]!="ignore":
+                    shell(f"mv {dest_folder}/{i}/{i}_2.fastq {dest_folder}/{i}/{i}_{params.RNA2}")
+                if config["RNA3"]!="ignore":
+                    shell(f"mv {dest_folder}/{i}/{i}_3.fastq {dest_folder}/{i}/{i}_{params.RNA3}")
+                if config["RNA4"]!="ignore":
+                    shell(f"mv {dest_folder}/{i}/{i}_4.fastq {dest_folder}/{i}/{i}_{params.RNA4}")
+            print("--zipping files--")
+            shell(f"pigz {dest_folder}/{srr_number}/*")
+
+            
+            
+
+rule run_cr:
+    input:
+        "{param}/fastq/{id}"
+    output:
+        "{param}/{id}"
+    resources:
+        load=50
+    params:
+        proc_dir=config["path"]["process_dir"],
+        run_type=config["type"],
+        ref_genome=config['path']['ref_genome']
+    run:
+        print("--running cellranger rule--")
+        if config["type"]=="multiome":
+            print("--running cellranger arc for multiome data--")
+            shell(  
+                """
+                cellranger-arc count --id={wildcards.id} \
+                        --reference={params.ref_genome} \
+                        --libraries=02_snakemake_download_cellranger/libraries/{wildcards.id}_libraries.csv \
+                        --localcores=48 \
+                        --localmem=64
+                """
+                )       
+
+        elif config["type"]=="ATAC":
+            print("--running cellranger atac for ATAC data--")
+
+            lib_csv = pd.read_csv(f"02_snakemake_download_cellranger/libraries/{wildcards.id}_libraries.csv") 
+            comma_separated_string_paths = ','.join(lib_csv['fastqs'])
+            shell(
+                f"""
+                cellranger-atac count --id={wildcards.id} \
+                                    --reference={params.ref_genome} \
+                                    --fastqs={comma_separated_string_paths} \
+                                    --localcores=48 \
+                    """         
+                )
+
+
+
+
+##sets ruleorder so snakemake doesn't get confused
+ruleorder: create_libraries_csv > fetch_fastq > run_cr

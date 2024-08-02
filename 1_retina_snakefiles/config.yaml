@@ -1,0 +1,22 @@
+type: "multiome" #ATAC or multiome
+remove_fastq: #true or false
+path:
+  #absolute path
+  wd: "/home/users/astar/gis/stufrancis/scratch/RETINA_ATLAS/test_run_multiome"
+  #relative path
+  ref_genome: "../../CellRangerFiles/refdata-cellranger-arc-GRCh38-2020-A-2.0.0"
+  #absolute path
+  metadata: "/home/users/astar/gis/stufrancis/scratch/RETINA_ATLAS/test_run_multiome/01_prep_metadata/test_run_multiome.csv"
+  #absolute path
+  process_dir: "/home/users/astar/gis/stufrancis/scratch/RETINA_ATLAS/test_run_multiome/02_snakemake_download_cellranger"
+
+#the name of the files must end in .fastq
+ATAC1 : "S1_L001_R1_001.fastq"
+ATAC2 : "S1_L001_R2_001.fastq"
+ATAC3 : "S1_L001_R3_001.fastq"
+ATAC4 : "ignore"
+
+RNA1 : "S1_L001_R1_001.fastq"
+RNA2 : "S1_L001_R2_001.fastq"
+RNA3 : "ignore"
+RNA4 : "ignore"
