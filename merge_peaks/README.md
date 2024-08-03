@@ -8,6 +8,7 @@ Run this workflow after "outs" generated from CellRanger to merge all the data i
 4) The metadata$dataset will have the information on which dataset a cell is from.
 5) The names of the output files between CellRangerARC and ATAC is different; use the right pipeline.
 6) setwd() and other minor details may need to be changed to cater to your own directory.
+7) Ensure path in config.yaml ends with "/"
 
 ## For successful extraction, directory structure must be as follows
 ```
