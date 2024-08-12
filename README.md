@@ -114,6 +114,9 @@ snakemake --cores all --keep-incomplete --resources load=100
 
 ## Snakemake rule pipeline
 
-![plot](./snakemake_rules.PNG) 
+<center>
+  <img src="./snakemake_rules.PNG" alt="Snakemake rule pipeline" />
+</center>
+
 
 **More detailed instructions in subfiles.**
