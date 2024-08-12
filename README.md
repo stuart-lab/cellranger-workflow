@@ -118,5 +118,4 @@ snakemake --cores all --keep-incomplete --resources load=100
   <img src="./dag.png" alt="Makes libraires for each ID" />
 </center>
 
-
-**More detailed instructions in subfiles.**
+**graph above shows a pipeline run for "id1" and "id2"**
