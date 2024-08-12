@@ -1,0 +1,15 @@
+SRR13633768
+SRR13633774
+SRR13633771
+SRR13633773
+SRR13633772
+SRR13633775
+SRR13633765
+metadata
+conda-archive
+singularity
+locks
+auxiliary
+shadow
+incomplete
+conda
