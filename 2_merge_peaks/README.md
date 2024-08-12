@@ -1,4 +1,7 @@
-# Extracting outputs from CellRanger 
+# This file is not up to date
+
+**Apart from extract.snakefile, please see jupyter notebook for downstream processing and R work**  
+
 Run this workflow after "outs" generated from CellRanger to merge all the data into 1 Seurat Object.
 
 ## Note
