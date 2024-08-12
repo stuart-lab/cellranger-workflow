@@ -114,8 +114,6 @@ snakemake --cores all --keep-incomplete --resources load=100
 
 ## Snakemake rule pipeline
 
-ATAC:                      |  Multiome:
-:-------------------------:|:-------------------------:
-![plot](./run_cr_atac.PNG) |  ![plot](./set_up.PNG)
+![plot](./snakemake_rules.PNG) 
 
-### More detailed instructions in subfiles.
+**More detailed instructions in subfiles.**
