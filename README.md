@@ -115,7 +115,7 @@ snakemake --cores all --keep-incomplete --resources load=100
 ## Snakemake rule pipeline
 
 <center>
-  <img src="./dag.PNG" alt="Makes libraires for each ID" />
+  <img src="./dag.png" alt="Makes libraires for each ID" />
 </center>
 
 
