@@ -7,6 +7,7 @@ df = pd.read_csv(config["path"]["metadata"])
 # Extract unique IDs from the 'ID' column
 IDs = set(df["ID"])
 
+#param is the path to 02_snakemake_cellranger
 rule all:
     input:
         expand("{param}/{id}", id  = IDs, param=config["path"]["process_dir"])
@@ -69,7 +70,6 @@ rule fetch_fastq:
             else:
                 dest_folder = f"{params.proc_dir}/fastq/{wildcards.id}/rna_seq"
 
-
             print("--fetching .sra file--")
             shell(f"prefetch {i} --max-size 100G -O {dest_folder}")
 
@@ -77,6 +77,8 @@ rule fetch_fastq:
             shell(f"fasterq-dump --split-files --include-technical {dest_folder}/{i}/{i}.sra -O {dest_folder}/{srr_number}")
 
             # Rename
+
+            print("--renaming files--")
             if library_type_of_srr == "Chromatin Accessibility":
                 print("--renaming ATAC files--")
                 if config["ATAC1"]!="ignore":
@@ -97,17 +99,15 @@ rule fetch_fastq:
                     shell(f"mv {dest_folder}/{i}/{i}_3.fastq {dest_folder}/{i}/{i}_{params.RNA3}")
                 if config["RNA4"]!="ignore":
                     shell(f"mv {dest_folder}/{i}/{i}_4.fastq {dest_folder}/{i}/{i}_{params.RNA4}")
-            print("--zipping files--")
-            shell(f"pigz {dest_folder}/{srr_number}/*")
 
-            
-            
+            print("--zipping files--") 
+            shell(f"pigz {dest_folder}/{srr_number}/*")
 
 rule run_cr:
     input:
         "{param}/fastq/{id}"
     output:
-        "{param}/{id}"
+        directory("{param}/{id}")
     resources:
         load=50
     params:
@@ -140,10 +140,13 @@ rule run_cr:
                                     --fastqs={comma_separated_string_paths} \
                                     --localcores=48 \
                     """         
-                )
+            )
+        shell("mv {wildcards.id} {params.proc_dir}/{wildcards.id}")
+
+
 
 
 
 
 ##sets ruleorder so snakemake doesn't get confused
-ruleorder: create_libraries_csv > fetch_fastq > run_cr
+ruleorder: create_libraries_csv > fetch_fastq > run_cr 
