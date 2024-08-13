@@ -123,3 +123,7 @@ snakemake --cores all --keep-incomplete --resources load=100
 </center>
 
 Graph above shows a pipeline run for "id1" and "id2"
+
+### #4 What to do after CellRanger is complete?
+After the CellRanger run is complete, the "key files" for downstream analysis need to be prefixed and suffixed (extracted) and merged into one Seurat object.
+First, have a look at [2_merge_peaks](./2_merge_peaks) for file extraction, and then [retina_atlas.ipynb](./retina_atlas.ipynb) for downstream work.
