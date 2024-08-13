@@ -36,7 +36,7 @@ snakemake --cores all --keep-incomplete --resources load=100
 Most important step of entire workflow. In this example, the file "test_run_multione.csv" is used in the config.yaml file - any file name can be used just edit config file accordingly.
 Ensure format of xxx_metadata.csv is adhered to strictly; Format should be exactly as that of the "xxx_metadata.csv" file provided.
 
-Note: "GSM" typically refers to a library and "SRR" to a run. Although these terminologies may be used inaccurately in the current context, please adhere to the column names specified in test_run_multione.csv for consistency and accuracy.
+Note: "GSM" typically refers to a library and "SRR" to a run. Although these terminologies may be used inaccurately in the current context, please adhere to the column names specified in test_run_multiome.csv for consistency and accuracy.
 
 
 ### #2 Adjusting parameters in config.yaml
