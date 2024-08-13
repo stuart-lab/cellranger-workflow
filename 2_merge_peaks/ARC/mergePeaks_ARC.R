@@ -1,3 +1,6 @@
+##Note: this script has been turned into a fuction; please refer to the .ipynb file in the main
+##page for more information, thank you!
+
 setwd("/home/users/astar/gis/stufrancis/scratch/R_work/retina_atac")
 
 library('EnsDb.Hsapiens.v86')
@@ -38,89 +41,81 @@ atac_prefixes <- readLines("accessions.txt")
 CommonPeakSet <- CommonPeakSetter(atac_prefixes)
 
 
-##merge
-SeuratObjectMerger_atac <- function(dataset_prefixes, common_peak_set) {
-  # load metadata
-  result_md <- list()
+multiome_merger <-function(multiome_prefixes, common_peak_set){
+  annotation <- GetGRangesFromEnsDb(ensdb = EnsDb.Hsapiens.v86)
+  seqlevels(annotation) <- paste0('chr', seqlevels(annotation))
   
-  message('--Metadata--')
-  for (i in dataset_prefixes){
-    result_md[[i]] <- read.table(
-      file = paste0("./metrics/", i, "_metrics.csv"),
-      stringsAsFactors = FALSE,
-      sep = ",",
-      header = TRUE
-    )%>% 
-      filter(barcode != "NO_BARCODE", 
-             is__cell_barcode ==1, 
-             passed_filters > 1000) %>%
-      column_to_rownames("barcode")        
-  }
-  
-  # create fragment object
-  
-  message('--Fragments--')
-  result_frags <- list()
-  for (i in dataset_prefixes){
-    result_frags[[i]] <- CreateFragmentObject(
-      path = paste0("./frags/", i, "_f.tsv.gz"),
-      cells = rownames(result_md[[i]])
-    )
-  }
-  
-  #Quantify peaks in each dataset
-  
-  message('--Counts--')
-  result_counts <- list()
-  for (i in dataset_prefixes){
-    message(paste("loading_counts",i))
-    result_counts[[i]] <- FeatureMatrix(
-      fragments = result_frags[[i]],
-      features = common_peak_set,
-      cells = rownames(result_md[[i]])
-    )
-  }
-  
-  message('--Create Chromatin Assay--')
-  
-  result_assay <- list()
-  for (i in dataset_prefixes){
-    result_assay[[i]] <- CreateChromatinAssay(result_counts[[i]], fragments = result_frags[[i]])
-  }
-  
-  message('--Create Seurat Object--')
-  
-  result_list <- list()
-  for (i in dataset_prefixes){
-    result_list[[i]] <- CreateSeuratObject(result_assay[[i]], assay = "ATAC_only", meta.data=result_md[[i]])
+  for (id in multiome_prefixes){
+    fragpath <- paste0("./frags/", id, "_f.tsv.gz")
+    counts <- Read10X_h5(paste0("./filtered_matrix/", id, "_filtered_matrix.h5"))
     
-    result_list[[i]]$dataset <- i
+    message(paste("loading_counts"))
+    rna_counts <- counts$`Gene Expression`
+    
+    metadata <- read_csv(paste0("./metrics/", id, "_metrics.csv"), show_col_types = FALSE)
+    #metadata <- metadata %>% column_to_rownames("barcode")
+    
+    message(paste("loading_metadata"))
+    
+    metadata <- dplyr::filter(metadata, is_cell ==1,
+                              atac_fragments > 1000) %>%
+      dplyr::rename(
+        duplicate=atac_dup_reads,
+        chimeric=atac_chimeric_reads,
+        unmapped=atac_unmapped_reads,
+        lowmapq=atac_lowmapq,
+        mitochondrial=atac_mitochondrial_reads,
+        passed_filters=atac_fragments,
+        is__cell_barcode=is_cell,
+        excluded_reason=excluded_reason,
+        TSS_fragments=atac_TSS_fragments,
+        peak_region_fragments=atac_peak_region_fragments,
+        peak_region_cutsites=atac_peak_region_cutsites)%>%
+      column_to_rownames("barcode")
+    
+    message(paste("removing low peak count cells from rna counts"))
+    rna_counts <- rna_counts[, colnames(rna_counts) %in% rownames(metadata)]
+    
+    message(paste("loading_fragments"))
+    
+    fragments <- CreateFragmentObject(
+      path = fragpath,
+      cells = rownames(metadata)
+    )
+    
+    
+    message(paste("atac_counts"))
+    
+    atac_counts <- FeatureMatrix(
+      fragments = fragments,
+      features = common_peak_set,
+      cells = rownames(metadata)
+    )
+    
+    message(paste("seurat_object"))
+    
+    tmp <- CreateSeuratObject(
+      counts = rna_counts,
+      assay = "RNA",
+      project = id
+    )
+    
+    message(paste("loading_atac_assay"))
+    
+    tmp[["ATAC"]] <- CreateChromatinAssay(
+      counts = atac_counts,
+      sep = c(":", "-"),
+      fragments = fragpath,
+      annotation = annotation
+    )
+    
+    tmp <- AddMetaData(
+      object = tmp,
+      metadata = metadata
+    )
+    assign(id, tmp, envir = .GlobalEnv)
   }
-  message('--Merge--')
   
-  combined <- merge(
-    x = result_list[[1]],
-    y = result_list[2:length(result_list)],
-    add.cell.ids = dataset_prefixes)
-  
-  return(combined) 
+  return('done')
 }
-
-retina_atac_atlas <- SeuratObjectMerger_atac(atac_prefixes, CommonPeakSet)
-
-# extract gene annotations from EnsDb
-annotations <- GetGRangesFromEnsDb(ensdb = EnsDb.Hsapiens.v86)
-
-# change to UCSC style since the data was mapped to hg19
-seqlevels(annotations) <- paste0('chr', seqlevels(annotations))
-genome(annotations) <- "hg38"
-
-Annotation(retina_atac_atlas) <- annotations
-
-
-retina_atac_atlas <- NucleosomeSignal(object = retina_atac_atlas, verbose = TRUE)
-retina_atac_atlas <- TSSEnrichment(object = retina_atac_atlas, fast = FALSE, verbose = TRUE)
-
-save(retina_atac_atlas, file = "retina_atac_atlas.rds")
-
 

@@ -1,3 +1,6 @@
+##Note: this script has been turned into a fuction; please refer to the .ipynb file in the main
+##page for more information, thank you!
+
 setwd("/home/users/astar/gis/stufrancis/scratch/R_work/retina_atac")
 
 library('EnsDb.Hsapiens.v86')
@@ -38,88 +41,63 @@ atac_prefixes <- readLines("accessions.txt")
 CommonPeakSet <- CommonPeakSetter(atac_prefixes)
 
 
-##merge
-SeuratObjectMerger_atac <- function(dataset_prefixes, common_peak_set) {
-  # load metadata
-  result_md <- list()
+#atac_merger <- function(atac_prefixes, common_peak_set){
+annotation <- GetGRangesFromEnsDb(ensdb = EnsDb.Hsapiens.v86)
+seqlevels(annotation) <- paste0('chr', seqlevels(annotation))
+for (id in atac_prefixes){
+  counts <- Read10X_h5(paste0("../retina_atac/filtered_matrix/", id, "_filtered_matrix.h5"))
+  fragpath <- paste0("../retina_atac/frags/", id, "_f.tsv.gz")
   
-  message('--Metadata--')
-  for (i in dataset_prefixes){
-    result_md[[i]] <- read.table(
-      file = paste0("./metrics/", i, "_metrics.csv"),
-      stringsAsFactors = FALSE,
-      sep = ",",
-      header = TRUE
-    )%>% 
-      filter(barcode != "NO_BARCODE", 
-             is__cell_barcode ==1, 
-             passed_filters > 1000) %>%
-      column_to_rownames("barcode")        
-  }
   
-  # create fragment object
   
-  message('--Fragments--')
-  result_frags <- list()
-  for (i in dataset_prefixes){
-    result_frags[[i]] <- CreateFragmentObject(
-      path = paste0("./frags/", i, "_f.tsv.gz"),
-      cells = rownames(result_md[[i]])
-    )
-  }
   
-  #Quantify peaks in each dataset
+  message(paste("loading_metadata"))
   
-  message('--Counts--')
-  result_counts <- list()
-  for (i in dataset_prefixes){
-    message(paste("loading_counts",i))
-    result_counts[[i]] <- FeatureMatrix(
-      fragments = result_frags[[i]],
-      features = common_peak_set,
-      cells = rownames(result_md[[i]])
-    )
-  }
+  metadata <- read.csv(
+    file = paste0("../retina_atac/metrics/", id, "_metrics.csv"),
+    header = TRUE,
+  ) %>% dplyr::filter(barcode != "NO_BARCODE", 
+                      is__cell_barcode == 1, 
+                      passed_filters > 1000) %>%
+    column_to_rownames("barcode") 
   
-  message('--Create Chromatin Assay--')
+  message(paste("loading_fragments"))
   
-  result_assay <- list()
-  for (i in dataset_prefixes){
-    result_assay[[i]] <- CreateChromatinAssay(result_counts[[i]], fragments = result_frags[[i]])
-  }
+  fragments <- CreateFragmentObject(
+    path = fragpath,
+    cells = rownames(metadata)
+  )
   
-  message('--Create Seurat Object--')
   
-  result_list <- list()
-  for (i in dataset_prefixes){
-    result_list[[i]] <- CreateSeuratObject(result_assay[[i]], assay = "ATAC_only", meta.data=result_md[[i]])
-    
-    result_list[[i]]$dataset <- i
-  }
-  message('--Merge--')
+  message(paste("atac_counts"))
   
-  combined <- merge(
-    x = result_list[[1]],
-    y = result_list[2:length(result_list)],
-    add.cell.ids = dataset_prefixes)
+  atac_counts <- FeatureMatrix(
+    fragments = fragments,
+    features = common_peak_set,
+    cells = rownames(metadata)
+  )
+  message(paste("chromatin_assay"))
+  chrom_assay <- CreateChromatinAssay(
+    counts = atac_counts,
+    sep = c(":", "-"),
+    fragments = fragments,
+    min.cells = 10,
+    min.features = 200
+  )
   
-  return(combined) 
+  message(paste("seurat_object"))
+  tmp <- CreateSeuratObject(
+    counts = chrom_assay,
+    assay = "ATAC",
+    meta.data = metadata,
+    project = id      
+  )
+  
+  assign(id, tmp, envir = .GlobalEnv)
 }
 
-retina_atac_atlas <- SeuratObjectMerger_atac(atac_prefixes, CommonPeakSet)
-
-# extract gene annotations from EnsDb
-annotations <- GetGRangesFromEnsDb(ensdb = EnsDb.Hsapiens.v86)
-
-# change to UCSC style since the data was mapped to hg19
-seqlevels(annotations) <- paste0('chr', seqlevels(annotations))
-genome(annotations) <- "hg38"
-
-Annotation(retina_atac_atlas) <- annotations
-
-
-retina_atac_atlas <- NucleosomeSignal(object = retina_atac_atlas, verbose = TRUE)
-retina_atac_atlas <- TSSEnrichment(object = retina_atac_atlas, fast = FALSE, verbose = TRUE)
+return('done')
+}
 
 save(retina_atac_atlas, file = "retina_atac_atlas.rds")
 
