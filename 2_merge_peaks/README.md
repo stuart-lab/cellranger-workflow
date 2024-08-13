@@ -1,6 +1,6 @@
-# This file is not up to date
+# General workflow after CellRanger for merging
 
-**Apart from extract.snakefile, please see jupyter notebook for downstream processing and R work**  
+**After from extract.snakefile, please see jupyter notebook for downstream processing and R work**  
 
 Run this workflow after "outs" generated from CellRanger to merge all the data into 1 Seurat Object.
 
