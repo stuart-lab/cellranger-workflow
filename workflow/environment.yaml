@@ -1,0 +1,15 @@
+name: run_cellranger_env
+channels:
+  - conda-forge
+  - bioconda
+  - defaults
+dependencies:
+  - python=3.12.7
+  - wget
+  - curl
+  - pigz
+  - tar
+  - snakemake=8.21.0
+  - sra-tools
+  - pandas
+

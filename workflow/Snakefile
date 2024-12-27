@@ -1,0 +1,34 @@
+from snakemake.utils import min_version
+
+# Make Sure Minimun Snakemake version
+min_version("8.21.0")
+
+# Import required package
+import pandas as pd
+
+# Load config file
+configfile: "../config/config.yaml"
+
+# Import all snakemake rule
+include: "rules/resources.smk"
+include: "rules/create_libraries_csv.smk"
+include: "rules/fetch_fastq.smk"
+include: "rules/run_cr.smk"
+
+# Read the CSV file to extract IDs
+df = pd.read_csv(config["path"]["metadata"])  
+# Extract unique IDs from the 'ID' column
+IDs = set(df["ID"])
+
+rule all:
+    input:
+        expand("{param}/{id}", id  = IDs, param=config["path"]["process_dir"]),
+
+onsuccess:
+	print("Success! The Snakemake workflow is completed.")
+
+onerror:
+	print("Error! The Snakemake workflow aborted.")
+
+##sets ruleorder so snakemake doesn't get confused
+ruleorder: get_cellranger > get_reference > create_libraries_csv > fetch_fastq > run_cr 
