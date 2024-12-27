@@ -1,0 +1,36 @@
+# Input the cellranger arc and atac url
+get_cellranger:
+  cr_arc_url: "https://cf.10xgenomics.com/releases/cell-arc/cellranger-arc-2.0.2.tar.gz?Expires=1733842609&Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly9jZi4xMHhnZW5vbWljcy5jb20vcmVsZWFzZXMvY2VsbC1hcmMvY2VsbHJhbmdlci1hcmMtMi4wLjIudGFyLmd6IiwiQ29uZGl0aW9uIjp7IkRhdGVMZXNzVGhhbiI6eyJBV1M6RXBvY2hUaW1lIjoxNzMzODQyNjA5fX19XX0_&Signature=ZdSN~-HR880tkCUt-AQhwuwe23jh6129tU6SgKA~crhsguZQur2ab-P51ps4TTFSkoWqMOA3ciXMEQa6ba7hwxiGehix9s5fEWq7I0PazCly9nOeHebTfqs2EgkOMqai4~rOVWUp8Ge0rucB9eHRD1tr1obY-FoYogk6Nzc60lo-qLlyNABftbo6dNrFJsdhQxJFNZC3f~OagVmMahogBTssfAgsy3EQ48tOZ0grzB5CUSLv-zdMkMxMg8EAgaIFQnYHcIKwE4RvE9AgVZdaAkJpJDHldQlpag2jB52kPJ8fJVeoZAR-9zQbzK~RcPNQtkbF6WzuzRuV5CEAevP4gw__&Key-Pair-Id=APKAI7S6A5RYOXBWRPDA"
+  cr_atac_url: "https://cf.10xgenomics.com/releases/cell-atac/cellranger-atac-2.1.0.tar.gz?Expires=1733842657&Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly9jZi4xMHhnZW5vbWljcy5jb20vcmVsZWFzZXMvY2VsbC1hdGFjL2NlbGxyYW5nZXItYXRhYy0yLjEuMC50YXIuZ3oiLCJDb25kaXRpb24iOnsiRGF0ZUxlc3NUaGFuIjp7IkFXUzpFcG9jaFRpbWUiOjE3MzM4NDI2NTd9fX1dfQ__&Signature=KPWze5hopY~v2ChmhTFx28LzubaQucmg-Kh3tVJfPhpEX9vLxuMmdQmV8Q2~eu~ZHXQvIQUufQNqqKn0CWhglJXzO-YXNXuJndiL1d5~M-WZwg6k8WrIyqiUDJRjc0VoTR~mURKIEt90WsGqOv5rCQ-ZDTy-uk2lEijvXEz5Rk2lqqpV1Fog6-15I4XQbJbLWUButI7mx647h8Wynyl8-L63bZbQ2PYp~AMzgwh6tehGNhrkXMI0snSdZmgCdaxzJ0ejX-EavU4MzPBSXCrNAW5qcit7M2BzIFFHQxqDD4ZZbIBGeL1EHfSqGxwHm~JESLTJpvJtezGej2IxTw~baA__&Key-Pair-Id=APKAI7S6A5RYOXBWRPDA"
+
+# Input the reference genome that will be used
+get_reference:
+  ref_url: "https://cf.10xgenomics.com/supp/cell-arc/refdata-cellranger-arc-GRCh38-2020-A-2.0.0.tar.gz"
+
+# Type of data being processed: "ATAC" or "multiome" only
+type: "ATAC" 
+
+# Put true or false. Default will be false
+remove_fastq: 
+
+# Insert the path for analysis
+path:
+  #absolute path
+  wd: "/home/users/astar/gis/stukaishi/scratch/cr_test/workflow"
+  #absolute path
+  metadata: "/home/users/astar/gis/stukaishi/scratch/cr_test/workflow/01_prep_metadata/GSE247157_atac_only_metadata.csv"
+  #absolute path
+  process_dir: "/home/users/astar/gis/stukaishi/scratch/cr_test/workflow/02_snakemake_download_cellranger"
+
+# Rename the file manually by determining which is I (index) and R (reads)
+# The name of the files must end in .fastq
+# Put "ignore" if such files not exist
+ATAC1 : "S1_L001_R1_001.fastq"
+ATAC2 : "S1_L001_R2_001.fastq"
+ATAC3 : "S1_L001_R3_001.fastq"
+ATAC4 : "ignore"
+
+RNA1 : "ignore"
+RNA2 : "ignore"
+RNA3 : "ignore"
+RNA4 : "ignore"
