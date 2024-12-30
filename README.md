@@ -153,6 +153,7 @@ After running the pipeline, here is how the structure look like:
 
 ## To do
 - Add on rule that rename and extract the files from ```outs``` folder needed to create seurat object as below
+  
 | Original file                 |Rename it to                |
 |:------------------------------|:---------------------------|
 | atac_peaks.bed                | peaks.bed                  |
@@ -162,6 +163,7 @@ After running the pipeline, here is how the structure look like:
 | atac_fragments.tsv.gz.tbi     | fragments.tsv.gz.tbi
 
 -  Add on rule to rename the seurat metadata column name so it match between both atac and multiome
+
 | Original column name |Rename it to                |
 |:---------------------|:---------------------------|
 |total                 | atac_raw_reads             |
