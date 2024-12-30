@@ -148,3 +148,32 @@ After running the pipeline, here is how the structure look like:
 | SRA_Toolkit   |https://github.com/ncbi/sra-tools/wiki/01.-Downloading-SRA-Toolkit         |
 | Snakemake     |https://snakemake.readthedocs.io/en/stable/                                |
 | PigZ          |https://zlib.net/pigz/     
+
+
+
+## To do
+- Add on rule that rename and extract the files from ```outs``` folder needed to create seurat object as below
+| Original file                 |Rename it to                |
+|:------------------------------|:---------------------------|
+| atac_peaks.bed                | peaks.bed                  |
+| per_barcode_metrics.csv       | singlecell.csv             |
+| filtered_feature_bc_matrix.h5 | filtered_peak_bc_matrix.h5 |
+| atac_fragments.tsv.gz         | fragments.tsv.gz           |
+| atac_fragments.tsv.gz.tbi     | fragments.tsv.gz.tbi
+
+-  Add on rule to rename the seurat metadata column name so it match between both atac and multiome
+| Original column name |Rename it to                |
+|:---------------------|:---------------------------|
+|total                 | atac_raw_reads             |
+|is__cell_barcode      | is_cell                    |
+|barcode               | atac_barcode               | 
+|duplicate             | atac_dup_reads             | 
+|chimeric              | atac_chimeric_reads        |
+|unmapped              | atac_unmapped_reads        |
+|lowmapq               | atac_lowmapq               |
+|mitochondrial         | atac_mitochondrial_reads   |
+|passed_filters        | atac_fragments             |
+|excluded_reason       | excluded_reason            |
+|TSS_fragments         | atac_TSS_fragments         |
+|peak_region_fragments | atac_peak_region_fragments |
+|peak_region_cutsites  | atac_peak_region_cutsites  |
